@@ -3,9 +3,18 @@ import { useState } from "react";
 function ProductCard ({isim,fiyat,resim,stokta}){
 
     const [adet, setAdet] = useState(0)
-    function sepeteEkle(){
+    function arttir(){
         setAdet(adet + 1);
+    } 
+
+    function azalt(){
+        if(adet > 0){
+        setAdet(adet - 1);
+
+        }
     }
+
+
 
  return(
   
@@ -19,8 +28,14 @@ function ProductCard ({isim,fiyat,resim,stokta}){
         className="photo"
    />
 
-    { stokta ?<button onClick={sepeteEkle}>Sepete Ekle</button> : null}
-    { stokta ? <p>Sepette: {adet}</p> : null}
+   { stokta ? 
+    <div>
+        <button onClick={azalt}>-</button>
+        <span>{adet}</span>
+        <button onClick={arttir}>+</button>
+    </div> 
+    : null}
+
     </div>
  );
 }
