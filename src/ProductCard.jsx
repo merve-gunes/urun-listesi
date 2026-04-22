@@ -1,8 +1,9 @@
 import { useState } from "react";
 
-function ProductCard ({isim,fiyat,resim,stokta}){
+function ProductCard ({isim,fiyat,resim,stokta,onSepeteEkle,onSepettenCikar}){
 
     const [adet, setAdet] = useState(0)
+
     function arttir(){
         setAdet(adet + 1);
     } 
@@ -13,8 +14,6 @@ function ProductCard ({isim,fiyat,resim,stokta}){
 
         }
     }
-
-
 
  return(
   
@@ -30,9 +29,9 @@ function ProductCard ({isim,fiyat,resim,stokta}){
 
    { stokta ? 
     <div>
-        <button onClick={azalt}>-</button>
+        <button onClick={() => { azalt(); onSepettenCikar(); }}>-</button>
         <span>{adet}</span>
-        <button onClick={arttir}>+</button>
+        <button onClick={() => { arttir(); onSepeteEkle(); }}>+</button>
     </div> 
     : null}
 

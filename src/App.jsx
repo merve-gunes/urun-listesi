@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 import ProductCard from "./ProductCard"
 const urunler = [
   {
@@ -22,12 +24,22 @@ const urunler = [
 ]
 
 function App() {
+
+    const [toplamAdet,setToplamAdet] = useState(0)
+    function sepeteEkle(){
+      setToplamAdet(toplamAdet + 1)
+    }
+    function sepettenCikar(){
+      setToplamAdet(toplamAdet - 1)
+    }
+
   return (
     <div>
       <h1>Ürün Listesi</h1>
+      <p>🛒 Sepetim ({toplamAdet})</p>
 
       {urunler.map(urun => (
-  <ProductCard  key={urun.id} isim={urun.isim} fiyat={urun.fiyat} resim={urun.resim} stokta={urun.stokta}/>
+  <ProductCard  key={urun.id} isim={urun.isim} fiyat={urun.fiyat} resim={urun.resim} stokta={urun.stokta} onSepeteEkle={sepeteEkle} onSepettenCikar={sepettenCikar}/>
 ))}
  
     </div>
