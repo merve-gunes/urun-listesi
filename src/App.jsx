@@ -1,5 +1,4 @@
 import ProductCard from "./ProductCard"
-
 const urunler = [
   {
     id:1,
@@ -30,10 +29,8 @@ function App() {
       {urunler.map(urun => (
   <ProductCard  key={urun.id} isim={urun.isim} fiyat={urun.fiyat} resim={urun.resim} stokta={urun.stokta}/>
 ))}
-
-      
+ 
     </div>
   );
 }
-
 export default App
