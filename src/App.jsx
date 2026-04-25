@@ -1,4 +1,6 @@
-import { useState } from "react"
+import "./App.css"
+
+import { useReducer } from "react"
 
 import ProductCard from "./ProductCard"
 const urunler = [
@@ -23,14 +25,28 @@ const urunler = [
 }
 ]
 
+ function sepetReducer(state,action){
+
+  if(action.type=== "EKLE"){
+     return state + 1
+  }
+
+  if(action.type === "CIKAR"){
+    return state - 1
+  }
+
+
+}
+
 function App() {
 
-    const [toplamAdet,setToplamAdet] = useState(0)
+    const [toplamAdet,dispatch] = useReducer(sepetReducer,0)
+    
     function sepeteEkle(){
-      setToplamAdet(toplamAdet + 1)
+      dispatch({ type: "EKLE"})
     }
     function sepettenCikar(){
-      setToplamAdet(toplamAdet - 1)
+      dispatch({ type: "CIKAR"})
     }
 
   return (
