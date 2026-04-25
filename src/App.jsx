@@ -1,6 +1,6 @@
 import "./App.css"
 
-import { useReducer } from "react"
+import { useReducer,createContext } from "react"
 
 import ProductCard from "./ProductCard"
 const urunler = [
@@ -32,11 +32,14 @@ const urunler = [
   }
 
   if(action.type === "CIKAR"){
-    return state - 1
-  }
-
-
+    if(state > 0){
+        return state - 1
+    }
+    return state
 }
+ }
+
+export const SepetContext = createContext()
 
 function App() {
 
@@ -49,16 +52,17 @@ function App() {
       dispatch({ type: "CIKAR"})
     }
 
-  return (
-    <div>
-      <h1>Ürün Listesi</h1>
-      <p>🛒 Sepetim ({toplamAdet})</p>
+ return (
+    <SepetContext.Provider value={{ sepeteEkle, sepettenCikar }}>
+      <div>
+        <h1>Ürün Listesi</h1>
+        <p>🛒 Sepetim ({toplamAdet})</p>
 
-      {urunler.map(urun => (
-  <ProductCard  key={urun.id} isim={urun.isim} fiyat={urun.fiyat} resim={urun.resim} stokta={urun.stokta} onSepeteEkle={sepeteEkle} onSepettenCikar={sepettenCikar}/>
-))}
- 
-    </div>
+        {urunler.map(urun => (
+          <ProductCard key={urun.id} isim={urun.isim} fiyat={urun.fiyat} resim={urun.resim} stokta={urun.stokta}/>
+        ))}
+      </div>
+    </SepetContext.Provider>
   );
 }
 export default App

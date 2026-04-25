@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useState,useContext } from "react";
+import { SepetContext } from "./App";
 
-function ProductCard ({isim,fiyat,resim,stokta,onSepeteEkle,onSepettenCikar}){
+function ProductCard ({isim,fiyat,resim,stokta}){
 
     const [adet, setAdet] = useState(0)
+    const { sepeteEkle,sepettenCikar } = useContext(SepetContext)
 
     function arttir(){
         setAdet(adet + 1);
@@ -29,9 +31,9 @@ function ProductCard ({isim,fiyat,resim,stokta,onSepeteEkle,onSepettenCikar}){
 
    { stokta ? 
     <div>
-        <button onClick={() => { azalt(); onSepettenCikar(); }}>-</button>
+        <button onClick={() => { azalt(); sepettenCikar(); }}>-</button>
         <span>{adet}</span>
-        <button onClick={() => { arttir(); onSepeteEkle(); }}>+</button>
+        <button onClick={() => { arttir(); sepeteEkle(); }}>+</button>
     </div> 
     : null}
 
